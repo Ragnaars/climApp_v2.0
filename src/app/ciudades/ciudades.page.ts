@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CondicionActService } from 'src/services/condicion-act.service';
+import { ObtenerLocalidadService } from 'src/services/obtener-localidad.service';
 
 @Component({
   selector: 'app-ciudades',
@@ -15,30 +16,27 @@ export class CiudadesPage implements OnInit {
 
   constructor(
     private condicion: CondicionActService,
+    private obtenerLocalidadService: ObtenerLocalidadService,
     private router: Router,
     private route: ActivatedRoute,
   ) { }
 
   ngOnInit() {
-    this.Ciudades(); // Llama al método Ciudades() cuando el componente se inicializa
-
-    // Suscripción a cambios en los parámetros de la URL
-    this.route.params.subscribe(params => {
-      // Recibe el código de la ciudad de los parámetros de la URL
-      this.codigoCiudadSeleccionada = params['codigo'];
-      console.log(this.codigoCiudadSeleccionada);
-    });
+    this.Ciudades();
   }
 
   Ciudades() {
-    this.condicion.getDataLocalidad().subscribe((localidad) => {
+    this.condicion.getDataLocalidad().subscribe((localidad: any) => {
       this.ciudades = localidad;
-      this.ciudadesFiltradas = [...localidad]; // Inicializar las ciudades filtradas con todas las ciudades
-      console.log(localidad);
+      this.ordenarCiudadesPorLatitud();
+      this.ciudadesFiltradas = [...this.ciudades]; // Inicializar las ciudades filtradas
     });
   }
 
-  // Función para filtrar las ciudades según la entrada del usuario
+  ordenarCiudadesPorLatitud() {
+    this.ciudades.sort((a: { latitud: number; }, b: { latitud: number; }) => a.latitud - b.latitud); // Ordenar de norte a sur
+  }
+
   filtrarCiudades(event: any) {
     const query = event.target.value.toLowerCase();
     this.ciudadesFiltradas = this.ciudades.filter((ciudad: any) => {
@@ -47,7 +45,6 @@ export class CiudadesPage implements OnInit {
   }
 
   seleccionarCiudad(ciudad: any) {
-    this.codigoCiudadSeleccionada = ciudad.codigo; // Almacena el código de la ciudad seleccionada
-    this.router.navigate(['/condicion-ciudad', ciudad.codigo]); // Navega a la página de Ciudad con el código de la ciudad como parámetro
+    this.router.navigate(['/condicion-ciudad', ciudad.codigo]);
   }
 }

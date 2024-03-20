@@ -10,8 +10,8 @@
 
 <ion-content [fullscreen]="true">
     <ion-list>
-      <!-- Itera sobre las ciudades filtradas en lugar de todas las ciudades -->
-      <ion-item *ngFor="let ciudad of ciudadesFiltradas" (click)="seleccionarCiudad(ciudad)">
+      <!-- Itera sobre las ciudades filtradas en orden inverso -->
+      <ion-item *ngFor="let ciudad of ciudadesFiltradas.slice().reverse()" (click)="seleccionarCiudad(ciudad)">
         {{ ciudad.nombre }}
       </ion-item>
     </ion-list>

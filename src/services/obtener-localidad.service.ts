@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'; 
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,8 +15,20 @@ export class ObtenerLocalidadService {
     return resultado;
   }
 
+  obtenerLocalidadCompletaConObservable(codigoRegion: string): Observable<any> {
+    const noCacheUrl = `${this.url}${codigoRegion}/pronostico?_t=${new Date().getTime()}`;
+    return this.http.get<any>(noCacheUrl).pipe(
+      map((response: { data: any; }) => response.data) // Suponiendo que la lista de ciudades está en la propiedad "data" del objeto de respuesta
+    );
+  }
+
 buscarPronosticoPorCodigo(codigo: string): Observable<any> {
   const noCacheUrl = `${this.url}${codigo}/pronostico?_t=${new Date().getTime()}`;
+  return this.http.get<any>(noCacheUrl);
+}
+
+obtenerCoordenadasPorCodigo(codigo: string): Observable<any> {
+  const noCacheUrl = `${this.url}${codigo}/coordenadas?_t=${new Date().getTime()}`;
   return this.http.get<any>(noCacheUrl);
 }
   
