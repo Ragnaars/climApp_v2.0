@@ -1,16 +1,17 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>Ciudades</ion-title>
     <ion-buttons slot="start">
       <ion-menu-button menu="main-menu"></ion-menu-button>
     </ion-buttons>
+    <!-- Agrega el evento (ionInput) para manejar la entrada del usuario -->
+    <ion-searchbar animated="true" placeholder="Nombre de la ciudad" (ionInput)="filtrarCiudades($event)"></ion-searchbar>
   </ion-toolbar>
 </ion-header>
 
 <ion-content [fullscreen]="true">
-
     <ion-list>
-      <ion-item *ngFor="let ciudad of ciudades" (click)="seleccionarCiudad(ciudad)">
+      <!-- Itera sobre las ciudades filtradas en lugar de todas las ciudades -->
+      <ion-item *ngFor="let ciudad of ciudadesFiltradas" (click)="seleccionarCiudad(ciudad)">
         {{ ciudad.nombre }}
       </ion-item>
     </ion-list>
