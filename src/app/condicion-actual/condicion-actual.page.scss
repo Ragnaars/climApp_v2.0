@@ -1,0 +1,130 @@
+
+* p{
+    font-family: 'MiFuente-Bold';
+  }
+  
+ion-menu-button {
+    color: var(--ion-color-primary);
+  }
+  
+
+#container {
+    text-align: center;
+    position: absolute;
+    justify-content: center;
+    align-items: center;
+    left: 0;
+    right: 0;
+    }
+  
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+    margin: 0;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+  #container div.uv{
+      color: aqua;
+      height: 50px;
+      width: 50px;
+      border-radius: 50%;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+  }
+
+.condicion-bruma {
+    background-image: url('/assets/fondocondicion/bruma.jpg');
+  }
+  
+  .condicion-brumanoche {
+    background-image: url('/assets/fondocondicion/brumanoche.jpg');
+  }
+  
+  .condicion-cubierto {
+    background-image: url('/assets/fondocondicion/cubierto.jpg');
+  }
+  
+  .condicion-cubiertonoche {
+    background-image: url('/assets/fondocondicion/cubiertonoche.jpg');
+  }
+  
+  .condicion-despejado {
+    background-image: url('/assets/fondocondicion/despejado.jpg');
+  }
+  
+  .condicion-despejadoconnubes {
+    background-image: url('/assets/fondocondicion/despejadoconnubes.jpg');
+  }
+  
+  .condicion-despejadoconnubesnoche {
+    background-image: url('/assets/fondocondicion/despejadoconnubesnoche.jpg');
+  }
+  
+  .condicion-despejadonoche {
+    background-image: url('/assets/fondocondicion/despejadonoche.jpg');
+  }
+  
+  .condicion-llovizna {
+    background-image: url('/assets/fondocondicion/llovizna.jpg');
+  }
+  
+  .condicion-lloviznanoche {
+    background-image: url('/assets/fondocondicion/lloviznanoche.jpg');
+  }
+  
+  .condicion-lluvia {
+    background-image: url('/assets/fondocondicion/lluvia.jpg');
+  }
+  
+  .condicion-lluvianoche {
+    background-image: url('/assets/fondocondicion/lluvianoche.jpg');
+  }
+  
+  .condicion-niebla {
+    background-image: url('/assets/fondocondicion/niebla.jpg');
+  }
+  
+  .condicion-nieblanoche {
+    background-image: url('/assets/fondocondicion/nieblanoche.jpg');
+  }
+  
+  .condicion-nieve {
+    background-image: url('/assets/fondocondicion/nieve.jpg');
+  }
+  
+  .condicion-sininformacion2 {
+    background-image: url('/assets/fondocondicion/sininformacion2.jpg');
+  }
+  
+  .condicion-tormentadearena {
+    background-image: url('/assets/fondocondicion/tormentadearena.jpg');
+  }
+  
+  .condicion-viento {
+    background-image: url('/assets/fondocondicion/viento.jpg');
+  }
+  
+  .condicion-cubiertoynevadas {
+    background-image: url('/assets/fondocondicion/cubierto y nevadas.jpg');
+  }
+
+  .scrollable-content {
+    height: 100vh; /* O ajusta la altura según tu diseño */
+    overflow-y: auto; /* Habilita el desplazamiento vertical cuando el contenido exceda la altura */
+  }
+  ion-card {
+    background: rgba(255, 255, 255, 0.65); /* Blanco con 50% de opacidad */
+  }  
+  ion-toolbar {
+    --background: rgba(255, 255, 255, 0.65); /* Blanco con 50% de opacidad */
+  }
+
