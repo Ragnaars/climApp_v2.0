@@ -181,7 +181,7 @@
                   height: 12vh;
                   background: rgba(255, 255, 255, 0.65);
                   box-shadow: 0px 2px 0px 1px rgb(85, 83, 83);
-                  margin: 0 auto 4vh auto;
+                  margin: 0 auto 3vh auto;
                   border-radius: 5px;
                 "
               >
@@ -225,6 +225,7 @@
                       <h2 style="font-family: OpenSans-Bold">
                         Min {{pronostico.temperaturaMinima}}°
                       </h2>
+
                       <h2 style="font-family: OpenSans-Bold">
                         Max {{pronostico.temperaturaMaxima}}°
                       </h2>
@@ -242,12 +243,14 @@
                     border-radius: 15%;
                     bottom: 175px;
                     right: 1.5vh;
+                    display: grid;
+                    place-items: center;
                   "
                 >
                   <h1
                     style="
-                      color: rgb(206, 206, 206);
-                      font-size: 18px;
+                      color: rgb(255, 255, 255);
+                      font-size: 20px;
                       font-family: OpenSans-Bold;
                     "
                   >
