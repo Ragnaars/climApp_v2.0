@@ -131,19 +131,18 @@
               <strong> {{pronosticos[0].timestamp}} </strong>
             </p>
 
-            <!-- <ion-card
+            <ion-card
               *ngFor="let pronostico of pronosticos"
               style="position: relative"
             >
-              <ion-card-header style="margin: 0%">
-                <ion-card-title></ion-card-title>
+              <ion-card-header style=" text-align: center">
                 <ion-card-subtitle *ngIf="pronostico.temperaturaMinima"
-                  >{{pronostico.dia}} • Min: {{pronostico.temperaturaMinima}}° •
-                  Max: {{pronostico.temperaturaMaxima}}°</ion-card-subtitle
+                  ><strong>{{pronostico.dia}} • Min: {{pronostico.temperaturaMinima}}° •
+                  Max: {{pronostico.temperaturaMaxima}}°</strong> </ion-card-subtitle
                 >
                 <ion-card-subtitle *ngIf="!pronostico.temperaturaMinima"
-                  >{{pronostico.dia}} • Max:
-                  {{pronostico.temperaturaMaxima}}°</ion-card-subtitle
+                  ><strong> {{pronostico.dia}} • Max:
+                  {{pronostico.temperaturaMaxima}}°</strong> </ion-card-subtitle
                 >
               </ion-card-header>
               <ion-card-content style="display: contents">
@@ -169,9 +168,9 @@
                   </ion-col>
                 </ion-row>
               </ion-card-content>
-            </ion-card> -->
+            </ion-card> 
 
-            <div
+            <!-- <div
               style="text-align: center"
               *ngFor="let pronostico of pronosticos"
             >
@@ -258,7 +257,7 @@
                   </h1>
                 </div>
               </div>
-            </div>
+            </div> -->
           </div>
         </div>
       </div>
