@@ -1,0 +1,24 @@
+ion-toolbar {
+    --background: rgba(255, 255, 255, 0.65); /* Blanco con 50% de opacidad */
+  }
+  
+  .container {
+    display: flex;
+    justify-content: center;
+  
+    
+  }
+  
+  .rotar {
+    animation: girar 5s infinite linear; /* Establece la animación como infinita */
+    transform-style: preserve-3d; /* Mejora el rendimiento de la animación */
+  }
+  
+  @keyframes girar {
+    from {
+        transform: rotateY(0deg); /* Gira desde 0 grados */
+    }
+    to {
+        transform: rotateY(360deg); /* Gira hasta 360 grados */
+    }
+  }

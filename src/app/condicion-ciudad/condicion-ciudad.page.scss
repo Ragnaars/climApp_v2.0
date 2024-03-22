@@ -117,14 +117,40 @@ ion-menu-button {
   background-image: url('/assets/fondocondicion/cubierto y nevadas.jpg');
 }
 
+.condicion-cubiertoynevadas {
+  background-image: url('/assets/fondocondicion/appfondo.jpg');
+}
+
 .scrollable-content {
   height: 100vh; /* O ajusta la altura según tu diseño */
   overflow-y: auto; /* Habilita el desplazamiento vertical cuando el contenido exceda la altura */
 }
+
 ion-card {
   background: rgba(255, 255, 255, 0.65); /* Blanco con 50% de opacidad */
 
 }  
 ion-toolbar {
   --background: rgba(255, 255, 255, 0.65); /* Blanco con 50% de opacidad */
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+
+  
+}
+
+.rotar {
+  animation: girar 5s infinite linear; /* Establece la animación como infinita */
+  transform-style: preserve-3d; /* Mejora el rendimiento de la animación */
+}
+
+@keyframes girar {
+  from {
+      transform: rotateY(0deg); /* Gira desde 0 grados */
+  }
+  to {
+      transform: rotateY(360deg); /* Gira hasta 360 grados */
+  }
 }

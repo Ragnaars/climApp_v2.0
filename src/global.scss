@@ -24,3 +24,16 @@
 @import "@ionic/angular/css/text-alignment.css";
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
+@font-face {
+    font-family: 'OpenSans-Regular';
+    src: url('./assets/fonts/OpenSans/OpenSans-Regular.ttf') format('truetype');
+}
+
+@font-face {
+    font-family: 'OpenSans-Italic';
+    src: url('./assets/fonts/OpenSans/OpenSans-Italic.ttf') format('truetype');
+}
+@font-face {
+    font-family: 'OpenSans-Bold';
+    src: url('./assets/fonts/OpenSans/OpenSans-Bold.ttf') format('truetype');
+}

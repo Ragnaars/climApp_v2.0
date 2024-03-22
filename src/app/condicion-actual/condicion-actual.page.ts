@@ -37,6 +37,7 @@ export class CondicionActualPage implements OnInit {
   fechaActualizado: any;
   expanded = true;
   horasDias = ["00:00", "06:00", "12:00", "18:00"]
+  isLoading = true;
   
 
   constructor(
@@ -127,7 +128,10 @@ export class CondicionActualPage implements OnInit {
   }
 
   // Función para obtener los datos del pronóstico de la localidad más cercana 
+
   obtenerDatosPronostico() {
+    this.isLoading = true; // Activar indicador de carga
+    
     this.pronosticoLocalidad.obtenerLocalidadCompleta(this.codigoLocalidad)
       .subscribe((localidad) => {
         this.datosPronosLocalidad = localidad.data[0];
@@ -138,11 +142,18 @@ export class CondicionActualPage implements OnInit {
         this.vientoFuerza = parseInt(this.objetoCondicion.vientoFuerza);
         this.vientoDireccion = parseInt(this.objetoCondicion.vientoDireccion);
         this.iconoViento = this.obtenerIconoDireccionViento();
-        this.condicionTexto = this.objetoCondicion.condicionTexto.toLowerCase().replace(/\s/g, '');if(this.vientoDireccion>0)
+        this.condicionTexto = this.objetoCondicion.condicionTexto.toLowerCase().replace(/\s/g, '');
+        
         console.log("objeto condicion", this.objetoCondicion);
         console.log("condicion texto", this.condicionTexto);
         console.log("pronostico localidad", this.datosPronosLocalidad);
         console.log("datos", localidad);
+  
+        this.isLoading = false; // Desactivar indicador de carga cuando se completan los datos
+      },
+      (error) => {
+        this.isLoading = false; // Desactivar indicador de carga en caso de error
+        console.error('Error al obtener datos del pronóstico', error);
       });
   }
 
