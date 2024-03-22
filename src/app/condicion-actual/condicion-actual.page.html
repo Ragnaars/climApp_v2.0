@@ -34,11 +34,24 @@ style = "background-image: url('../../assets/fondocondicion/appfondo.jpg')">
 </div>
 </body>
 
+
+
+
+
+
+<!--SWIPÉR PARA TODAS LAS CIUDADES-->
+
+
+
 <body 
   *ngIf= "!isLoading "
   [style.backgroundImage]="'url(assets/fondocondicion/' + condicionTexto + '.jpg)'"
   style="background-size: cover; background-position: center; overflow: auto"
 >
+
+
+
+
   <ion-card
     style="
       box-shadow: 0px 2px 0px 1px rgb(143, 135, 135);
@@ -65,8 +78,16 @@ style = "background-image: url('../../assets/fondocondicion/appfondo.jpg')">
                 text-align: center;
               "
             >
+            
               {{ redondearTemperatura() }}°
             </h2>
+
+            <swiper-container>
+              <swiper-slide *ngFor = " let codCiudad of ciudadesAgregadas">
+                <h1>{{codCiudad}}</h1>
+              </swiper-slide>
+            </swiper-container>
+            
           </ion-col>
           <ion-col></ion-col>
         </ion-row>

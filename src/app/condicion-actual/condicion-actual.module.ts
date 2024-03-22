@@ -5,7 +5,7 @@ import { FormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 
 import { CondicionActualPageRoutingModule } from './condicion-actual-routing.module';
-
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CondicionActualPage } from './condicion-actual.page';
 
 @NgModule({
@@ -15,6 +15,7 @@ import { CondicionActualPage } from './condicion-actual.page';
     IonicModule,
     CondicionActualPageRoutingModule
   ],
-  declarations: [CondicionActualPage]
+  declarations: [CondicionActualPage],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class CondicionActualPageModule {}

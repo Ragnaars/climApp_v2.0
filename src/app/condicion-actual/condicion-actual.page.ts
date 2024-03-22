@@ -4,16 +4,29 @@ import { CondicionActService } from 'src/services/condicion-act.service';
 import { ObtenerLocalidadService } from 'src/services/obtener-localidad.service';
 import { Geolocation, Position, PositionOptions } from '@capacitor/geolocation';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
-import { ThisReceiver } from '@angular/compiler';
+import { register } from 'swiper/element/bundle';
+import { Subscription } from 'rxjs';
+import {ColeccionCiudadesService} from "../../services/coleccionCiudades/coleccion-ciudades.service";
+register()
+
+
+
+
+
 
 @Component({
   selector: 'app-condicion-actual',
   templateUrl: './condicion-actual.page.html',
   styleUrls: ['./condicion-actual.page.scss'],
 })
+
+
+
 export class CondicionActualPage implements OnInit {
 
   // VARIABLES
+  ciudadesAgregadas: string[] = [];
+  ciudadesAgregadasSubscription!: Subscription;
   coordenadas: any;
   distanciaMinima = Infinity;
   puntoMasCercano: any;
@@ -38,22 +51,35 @@ export class CondicionActualPage implements OnInit {
   expanded = true;
   horasDias = ["00:00", "06:00", "12:00", "18:00"]
   isLoading = true;
+
   
 
   constructor(
     private condicion: CondicionActService,
     private pronosticoLocalidad: ObtenerLocalidadService,
-    private router: Router,) {
+    private router: Router,
+    private coleccionCiudades: ColeccionCiudadesService) {
     // Llama a infiniteScrollCiudades aquí para que se cargue la lista de ciudades al iniciar la aplicación
     this.obtenerUbicacionActual();
     this.infiniteScrollCiudades();
 
   }
 
+
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.ciudadesAgregadasSubscription = this.coleccionCiudades.ciudadesAgregadas$.subscribe(ciudades => {
+      this.ciudadesAgregadas = ciudades;
+      console.log('Array de ciudades actualizado:', this.ciudadesAgregadas);
+    });
+    
     // Llama a obtenerUbicacionActual aquí
         // Obtén el elemento de la imagen
+  }
+
+  ngOnDestroy(): void {
+    // Asegúrate de desuscribirte para evitar memory leaks
+    this.ciudadesAgregadasSubscription.unsubscribe();
   }
 
   //FUNCIONES PARA OBTENER UBICACION ACTUAL Y PRONOSTICO DE LOCALIDAD MAS CERCANA
@@ -109,7 +135,7 @@ export class CondicionActualPage implements OnInit {
       // Itera sobre el arreglo de localidades
       localidad.forEach((element: { latitud: number; longitud: number; }) => {
         // Calcula la distancia entre la ubicación actual y cada localidad
-        const distancia = this.haversine(-33.4520902,-70.6997211, element.latitud, element.longitud)
+        const distancia = this.haversine(-74,-75.6997211, element.latitud, element.longitud)
 
         // Compara la distancia con this.distanciaMinima y actualiza si es menor
         if (distancia < this.distanciaMinima) {
@@ -156,6 +182,8 @@ export class CondicionActualPage implements OnInit {
         console.error('Error al obtener datos del pronóstico', error);
       });
   }
+
+  
 
   obtenerIconoDireccionViento(){
     if(this.vientoDireccion == 0 && this.vientoFuerza == 0){
@@ -233,6 +261,15 @@ export class CondicionActualPage implements OnInit {
   }
 }
 
+obtenerDatosCiudadesFavs(){
+  this.ciudadesAgregadas.forEach((codCiudad: any) => {
+    this.pronosticoLocalidad.obtenerLocalidadCompleta(codCiudad)
+    .subscribe((localidad : any) =>{
+      console.log("localidades favoritas");
+
+    })
+  })
+}
 
 
 

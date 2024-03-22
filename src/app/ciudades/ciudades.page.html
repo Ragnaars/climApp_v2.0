@@ -13,6 +13,16 @@
       <!-- Itera sobre las ciudades filtradas en orden inverso -->
       <ion-item *ngFor="let ciudad of ciudadesFiltradas.slice().reverse()" (click)="seleccionarCiudad(ciudad)">
         {{ ciudad.nombre }}
+        <ion-buttons slot = "end">
+          <ion-button class="botonAgregar" (click)="agregarCiudad(ciudad.codigo)">
+            <ion-icon name="add-outline"></ion-icon>
+          </ion-button>
+          <ion-button class="botonAgregar" (click)="eliminarCiudad(ciudad.codigo)">
+            <ion-icon name="trash-outline"></ion-icon>
+          </ion-button>
+        </ion-buttons>
+          
+
       </ion-item>
     </ion-list>
 </ion-content>
