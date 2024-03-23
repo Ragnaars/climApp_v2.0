@@ -22,20 +22,27 @@
   </a>
 </ion-toolbar>
 
-<body 
+<body
   *ngIf="isLoading"
-  style = "background-image: url('../../assets/fondocondicion/appfondo.jpg')">
-
-  <div  style="text-align: center; position:relative;top:33%">
+  style="background-image: url('../../assets/fondocondicion/appfondo.jpg')"
+>
+  <div style="text-align: center; position: relative; top: 33%">
     <div class="container">
-        <img src="../../assets/icon/DMC-logo.png" alt="Imagen" class="rotar" style = "height: 200px; width : 200px" >
+      <img
+        src="../../assets/icon/DMC-logo.png"
+        alt="Imagen"
+        class="rotar"
+        style="height: 200px; width: 200px"
+      />
     </div>
-    <h2 style = "font-family: OpenSans-Bold ">Buscando datos climatológicos para {{nombreLocalidad}}</h2>
-</div>
+    <h2 style="font-family: OpenSans-Bold">
+      Buscando datos climatológicos para {{nombreLocalidad}}
+    </h2>
+  </div>
 </body>
 
-<body 
-  *ngIf= "!isLoading "
+<body
+  *ngIf="!isLoading "
   [style.backgroundImage]="'url(assets/fondocondicion/' + condicionTexto + '.jpg)'"
   style="background-size: cover; background-position: center; overflow: auto"
 >
@@ -148,15 +155,19 @@
               *ngFor="let pronostico of pronosticos"
               style="position: relative"
             >
-              <ion-card-header style=" text-align: center ; display:contents ;  ">
+              <ion-card-header style="text-align: center; display: contents">
                 <ion-card-subtitle *ngIf="pronostico.temperaturaMinima"
-                  ><strong>{{pronostico.dia}} • Min: {{pronostico.temperaturaMinima}}° •
-                  Max: {{pronostico.temperaturaMaxima}}°</strong> </ion-card-subtitle
-                >
+                  ><strong
+                    >{{pronostico.dia}} • Min: {{pronostico.temperaturaMinima}}°
+                    • Max: {{pronostico.temperaturaMaxima}}°</strong
+                  >
+                </ion-card-subtitle>
                 <ion-card-subtitle *ngIf="!pronostico.temperaturaMinima"
-                  ><strong> {{pronostico.dia}} • Max:
-                  {{pronostico.temperaturaMaxima}}°</strong> </ion-card-subtitle
-                >
+                  ><strong>
+                    {{pronostico.dia}} • Max:
+                    {{pronostico.temperaturaMaxima}}°</strong
+                  >
+                </ion-card-subtitle>
               </ion-card-header>
               <ion-card-content style="display: contents">
                 <ion-row style="text-align: center">
@@ -181,7 +192,7 @@
                   </ion-col>
                 </ion-row>
               </ion-card-content>
-            </ion-card> 
+            </ion-card>
           </div>
         </div>
       </div>

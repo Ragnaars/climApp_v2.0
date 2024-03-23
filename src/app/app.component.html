@@ -1,42 +1,136 @@
-<ion-app>
-  <ion-menu  menuId="main-menu" contentId="main">
-    <ion-header>
-      <ion-toolbar>
-        <ion-title style="text-align: center;">DGAC/DMC</ion-title>
+<body style="background: url(../assets/fondocondicion/appfondo.jpg)">
+  <ion-menu menuId="main-menu" contentId="main">
+    <ion-header
+      style="
+        background-image: linear-gradient(
+          to LEFT,
+          #084094,
+          #0043aa,
+          #0045c0,
+          #0046d6,
+          #1745eb
+        );
+      "
+    >
+      <ion-toolbar
+        color="linear-gradient(to right bottom, #136ff9, #009ff5, #00bccb, #8ccfb3, #d7deca);"
+      >
+        <ion-title style="text-align: center">DGAC/DMC</ion-title>
       </ion-toolbar>
     </ion-header>
-    <ion-content>
-      <ion-list>
-        <ion-menu-toggle>
-          <ion-item routerLink="/condicion-actual">
-            <ion-icon name="location" slot="start"></ion-icon>
-            <ion-label>Condición Actual</ion-label>
-          </ion-item>
+    <div>
+      <ion-list
+        style="
+          background-color: transparent;
+          position: absolute;
+          top: 3rem;
+          width: 100%;
+        "
+      >
+        <ion-menu-toggle
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+          "
+        >
+          <div
+            routerLink="/condicion-actual"
+            style="display: flex; align-items: center; width: 100%"
+          >
+            <ion-col size="2">
+              <ion-icon
+                style="color: black; width: 25px; height: 25px"
+                name="location"
+              ></ion-icon>
+            </ion-col>
+            <ion-col size="10">
+              <h3 style="color: black">Condición Actual</h3>
+            </ion-col>
+          </div>
         </ion-menu-toggle>
-        <ion-menu-toggle>
-          <ion-item routerLink="/ciudades">
+        <ion-menu-toggle
+          style="
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+            cursor: pointer;
+          "
+        >
+          <div
+            routerLink="/ciudades"
+            style="display: inherit; align-items: center width 100%"
+          >
+            <ion-col size="2">
+              <ion-icon
+                style="color: black; width: 25px; height: 25px"
+                name="compass"
+              ></ion-icon>
+            </ion-col>
+            <ion-col size="10">
+              <h3 style="color: black">Ciudades</h3>
+            </ion-col>
+          </div>
+          <!-- <div
+            routerLink="/ciudades"
+            style="display: flex; align-items: center"
+          >
             <ion-icon name="compass" slot="start"></ion-icon>
-            <ion-label>Ciudades</ion-label>
-          </ion-item>
+            <ion-label style="margin-left: 10px">Ciudades</ion-label>
+          </div> -->
         </ion-menu-toggle>
       </ion-list>
       <!-- Mover el footer fuera del ion-content -->
-    </ion-content>
-    <ion-footer>
-      <ion-toolbar style="position: fixed; bottom: 0; width: 100%;">
+    </div>
+    <ion-footer
+      style="
+        background-image: linear-gradient(
+          to LEFT,
+          #084094,
+          #0043aa,
+          #0045c0,
+          #0046d6,
+          #1745eb
+        );
+      "
+    >
+      <ion-toolbar
+        style="bottom: 0; width: 100%"
+        color="linear-gradient(to right bottom, #136ff9, #009ff5, #00bccb, #8ccfb3, #d7deca);"
+      >
+        <!--sI LE AGREGAMOS PISITION:FIXED SE QUITA EL FONDE DEL FOOTER HACIENDOLO INVISIBLE-->
         <ion-row style="text-align: center; justify-content: center">
-          <ion-col> 
-            <a href="https://www.facebook.com/DGACCHILE/?locale=es_LA"><img src="../assets/icon/boton-fb.png" alt="" style="height: 30px; width: 30px;"></a> 
+          <ion-col>
+            <a href="https://www.facebook.com/DGACCHILE/?locale=es_LA"
+              ><img
+                src="../assets/icon/boton-fb.png"
+                alt=""
+                style="height: 30px; width: 30px"
+            /></a>
           </ion-col>
           <ion-col>
-            <a href="https://www.instagram.com/dgacchile/?hl=es"><img src="../assets/icon/boton-ig.png" alt="" style="height: 30px; width: 30px;"></a> 
+            <a href="https://www.instagram.com/dgacchile/?hl=es"
+              ><img
+                src="../assets/icon/boton-ig.png"
+                alt=""
+                style="height: 30px; width: 30px"
+            /></a>
           </ion-col>
           <ion-col>
-            <a href="https://twitter.com/DGACChile?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"><img src="../assets/icon/boton-tw.png" alt="" style="height: 30px; width: 30px;"></a> 
+            <a
+              href="https://twitter.com/DGACChile?ref_src=twsrc%5Egoogle%7Ctwcamp%5Eserp%7Ctwgr%5Eauthor"
+              ><img
+                src="../assets/icon/boton-tw.png"
+                alt=""
+                style="height: 30px; width: 30px"
+            /></a>
           </ion-col>
         </ion-row>
       </ion-toolbar>
     </ion-footer>
   </ion-menu>
   <ion-router-outlet id="main"></ion-router-outlet>
-</ion-app>
+</body>

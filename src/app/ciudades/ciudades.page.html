@@ -1,28 +1,82 @@
-<ion-header [translucent]="true">
-  <ion-toolbar>
-    <ion-buttons slot="start">
-      <ion-menu-button menu="main-menu"></ion-menu-button>
-    </ion-buttons>
-    <!-- Agrega el evento (ionInput) para manejar la entrada del usuario -->
-    <ion-searchbar placeholder="Nombre de la ciudad" (ionInput)="filtrarCiudades($event)"></ion-searchbar>
-  </ion-toolbar>
-</ion-header>
+<ion-toolbar
+  style="
+    justify-content: space-between;
+    --background: rgba(255, 255, 255, 0.65);
+  "
+>
+  <ion-buttons slot="start">
+    <ion-menu-button color="primary" menu="main-menu"></ion-menu-button>
+  </ion-buttons>
+  <!-- Agrega el evento (ionInput) para manejar la entrada del usuario -->
+  <ion-searchbar
+    style="
+      display: contents;
+      margin: 10px;
+      margin-right: auto;
+      --background: rgba(255, 255, 255, 0.65);
+      color: black;
+    "
+    placeholder="Nombre de la ciudad"
+    (ionInput)="filtrarCiudades($event)"
+  ></ion-searchbar>
+</ion-toolbar>
 
-<ion-content [fullscreen]="true">
-    <ion-list>
-      <!-- Itera sobre las ciudades filtradas en orden inverso -->
-      <ion-item *ngFor="let ciudad of ciudadesFiltradas.slice().reverse()" (click)="seleccionarCiudad(ciudad)">
-        {{ ciudad.nombre }}
-        <ion-buttons slot = "end">
-          <ion-button class="botonAgregar" (click)="agregarCiudad(ciudad.codigo)">
-            <ion-icon name="add-outline"></ion-icon>
-          </ion-button>
-          <ion-button class="botonAgregar" (click)="eliminarCiudad(ciudad.codigo)">
-            <ion-icon name="trash-outline"></ion-icon>
-          </ion-button>
-        </ion-buttons>
-          
-
-      </ion-item>
-    </ion-list>
-</ion-content>
+<div
+  style="
+    background-image: url('../../assets/fondocondicion/appfondo.jpg');
+    background-size: cover;
+    background-position: center;
+    height: 100%;
+    overflow-y: auto;
+  "
+>
+  <ion-list style="background-color: transparent">
+    <!-- Itera sobre las ciudades filtradas en orden inverso -->
+    <ion-grid>
+      <ion-row>
+        <ion-col size="12">
+          <div
+            *ngFor="let ciudad of ciudadesFiltradas.slice().reverse()"
+            style="
+              display: flex;
+              align-items: center;
+              justify-content: space-between;
+              border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+              padding: 10px;
+              cursor: pointer;
+            "
+            (click)="seleccionarCiudad(ciudad)"
+          >
+            <div
+              style="
+                color: black;
+                font-size: 22px;
+                font-family: OpenSans-Regular;
+              "
+            >
+              {{ ciudad.nombre }}
+            </div>
+            <div>
+              <ion-buttons>
+                <ion-button
+                  class="botonAgregar"
+                  (click)="agregarCiudad(ciudad.codigo)"
+                  style="margin-right: 8px"
+                >
+                  <ion-icon style="color: white" name="add-outline"></ion-icon>
+                </ion-button>
+                <ion-button
+                  class="botonEliminar"
+                  (click)="eliminarCiudad(ciudad.codigo)"
+                >
+                  <ion-icon name="trash-outline" style="color: white">
+                  </ion-icon>
+                </ion-button>
+              </ion-buttons>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-list>
+</div>
