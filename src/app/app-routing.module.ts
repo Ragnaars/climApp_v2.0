@@ -23,6 +23,10 @@ const routes: Routes = [
     path: 'condicion-ciudad/:codigo',
     loadChildren: () => import('./condicion-ciudad/condicion-ciudad.module').then( m => m.CondicionCiudadPageModule)
   },
+  {
+    path: 'meteochile',
+    loadChildren: () => import('./meteochile/meteochile.module').then( m => m.MeteochilePageModule)
+  },
 ];
 
 @NgModule({

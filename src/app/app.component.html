@@ -43,7 +43,7 @@
             <ion-col size="2">
               <ion-icon
                 style="color: black; width: 25px; height: 25px"
-                name="location"
+                name="sunny-outline"
               ></ion-icon>
             </ion-col>
             <ion-col size="10">
@@ -67,7 +67,7 @@
             <ion-col size="2">
               <ion-icon
                 style="color: black; width: 25px; height: 25px"
-                name="compass"
+                name="location-outline"
               ></ion-icon>
             </ion-col>
             <ion-col size="10">
@@ -82,6 +82,30 @@
             <ion-label style="margin-left: 10px">Ciudades</ion-label>
           </div> -->
         </ion-menu-toggle>
+        <ion-menu-toggle
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+          cursor: pointer;
+        "
+      >
+        <div
+          routerLink="/meteochile"
+          style="display: inherit; align-items: center width 100%"
+        >
+          <ion-col size="2">
+            <ion-icon
+              style="color: black; width: 25px; height: 25px"
+              name="compass-outline"
+            ></ion-icon>
+          </ion-col>
+          <ion-col size="10">
+            <h3 style="color: black">Meteochile</h3>
+          </ion-col>
+        </div>
+      </ion-menu-toggle>
       </ion-list>
       <!-- Mover el footer fuera del ion-content -->
     </div>
