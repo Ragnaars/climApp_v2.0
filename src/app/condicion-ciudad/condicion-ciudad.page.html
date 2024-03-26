@@ -46,6 +46,20 @@
   [style.backgroundImage]="'url(assets/fondocondicion/' + condicionTexto + '.jpg)'"
   style="background-size: cover; background-position: center; overflow: auto"
 >
+  <div style="position: relative; top: 4rem">
+    <ion-buttons>
+      <ion-button
+        class="botonAgregar"
+        (click)="agregarCiudad(codigoCiudad)"
+        style="margin-right: 8px"
+      >
+        <ion-icon style="color: white" name="add-outline"></ion-icon>
+      </ion-button>
+      <ion-button class="botonEliminar" (click)="eliminarCiudad(codigoCiudad)">
+        <ion-icon name="trash-outline" style="color: white"> </ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </div>
   <ion-card
     style="
       box-shadow: 0px 2px 0px 1px rgb(143, 135, 135);

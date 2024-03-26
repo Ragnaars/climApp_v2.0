@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CondicionActService } from 'src/services/condicion-act.service';
 import { ObtenerLocalidadService } from 'src/services/obtener-localidad.service';
-import {ColeccionCiudadesService} from "../../services/coleccionCiudades/coleccion-ciudades.service";
+import { ColeccionCiudadesService } from "../../services/coleccionCiudades/coleccion-ciudades.service";
 
 @Component({
   selector: 'app-ciudades',
@@ -50,11 +50,11 @@ export class CiudadesPage implements OnInit {
     this.router.navigate(['/condicion-ciudad', ciudad.codigo]);
   }
 
-  agregarCiudad(codigoCiudad : any){
-    this.coleccionCiudadesService.agregarCiudad(codigoCiudad);
-  }
+  // agregarCiudad(codigoCiudad : any){
+  //   this.coleccionCiudadesService.agregarCiudad(codigoCiudad);
+  // }
 
-  eliminarCiudad(codCiudad:any){
-    this.coleccionCiudadesService.eliminarCiudad(codCiudad);
-  }
+  // eliminarCiudad(codCiudad:any){
+  //   this.coleccionCiudadesService.eliminarCiudad(codCiudad);
+  // }
 }

@@ -1,6 +1,8 @@
 import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ObtenerLocalidadService } from 'src/services/obtener-localidad.service';
+import { ColeccionCiudadesService } from "../../services/coleccionCiudades/coleccion-ciudades.service"
+import { Router } from '@angular/router';
 
 
 interface AccordionItem {
@@ -32,6 +34,8 @@ export class CondicionCiudadPage implements OnInit {
 
   constructor(
     private route: ActivatedRoute, // Inyección del servicio ActivatedRoute para obtener parámetros de la URL
+    private router: Router, // Inyección del servicio Router para la navegación
+    private coleccionCiudadesService: ColeccionCiudadesService,
     private pronosticoLocalidad: ObtenerLocalidadService // Inyección del servicio para obtener el pronóstico de la localidad
   ) { }
 
@@ -158,6 +162,19 @@ export class CondicionCiudadPage implements OnInit {
   }
   toggleAccordion() {
     this.expanded = !this.expanded;
+  }
+
+
+  seleccionarCiudad(ciudad: any) {
+    this.router.navigate(['/condicion-ciudad', ciudad.codigo]);
+  }
+
+  agregarCiudad(codigoCiudad: any) {
+    this.coleccionCiudadesService.agregarCiudad(codigoCiudad);
+  }
+
+  eliminarCiudad(codCiudad: any) {
+    this.coleccionCiudadesService.eliminarCiudad(codCiudad);
   }
 
 

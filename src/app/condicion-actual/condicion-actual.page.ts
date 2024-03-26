@@ -5,8 +5,9 @@ import { ObtenerLocalidadService } from 'src/services/obtener-localidad.service'
 import { Geolocation, Position, PositionOptions } from '@capacitor/geolocation';
 import { InfiniteScrollCustomEvent } from '@ionic/angular';
 import { register } from 'swiper/element/bundle';
-import { Subscription } from 'rxjs';
-import {ColeccionCiudadesService} from "../../services/coleccionCiudades/coleccion-ciudades.service";
+import { BehaviorSubject, Subscription } from 'rxjs';
+import { forkJoin } from 'rxjs';
+import { ColeccionCiudadesService } from "../../services/coleccionCiudades/coleccion-ciudades.service";
 register()
 
 
@@ -25,8 +26,13 @@ register()
 export class CondicionActualPage implements OnInit {
 
   // VARIABLES
-  ciudadesAgregadas: string[] = [];
-  ciudadesAgregadasSubscription!: Subscription;
+  codCiudadesAgregadas: string[] = [];
+  codCiudadesAgregadasSubscription!: Subscription
+
+  ciudadesAgregadas: any[] = [];
+  ciudadesAgregadasSubscription!: Subscription
+
+
   coordenadas: any;
   distanciaMinima = Infinity;
   puntoMasCercano: any;
@@ -46,13 +52,13 @@ export class CondicionActualPage implements OnInit {
   vientoDireccion: any;
   vientoFuerza: any;
   iconoViento: any;
-  vientoCondicion : any
+  vientoCondicion: any
   fechaActualizado: any;
   expanded = true;
   horasDias = ["00:00", "06:00", "12:00", "18:00"]
   isLoading = true;
 
-  
+
 
   constructor(
     private condicion: CondicionActService,
@@ -66,19 +72,27 @@ export class CondicionActualPage implements OnInit {
   }
 
 
+
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
-    this.ciudadesAgregadasSubscription = this.coleccionCiudades.ciudadesAgregadas$.subscribe(ciudades => {
-      this.ciudadesAgregadas = ciudades;
-      console.log('Array de ciudades actualizado:', this.ciudadesAgregadas);
+    this.codCiudadesAgregadasSubscription = this.coleccionCiudades.codCiudadesAgregadas$.subscribe(ciudades => {
+      const observables = ciudades.map(ciudad => this.pronosticoLocalidad.obtenerLocalidadCompleta(ciudad));
+
+      forkJoin(observables).subscribe(resultados => {
+        // Filtra los resultados para eliminar cualquier elemento vacío
+        resultados = resultados.filter(resultado => resultado.data.length > 0);
+
+        // Actualiza el array ciudadesAgregadas
+        this.ciudadesAgregadas = resultados.map(resultado => resultado.data[0]);
+
+        console.log("ciudades agregadas", this.ciudadesAgregadas);
+      });
     });
-    
-    // Llama a obtenerUbicacionActual aquí
-        // Obtén el elemento de la imagen
   }
 
   ngOnDestroy(): void {
     // Asegúrate de desuscribirte para evitar memory leaks
+    this.codCiudadesAgregadasSubscription.unsubscribe();
     this.ciudadesAgregadasSubscription.unsubscribe();
   }
 
@@ -135,7 +149,7 @@ export class CondicionActualPage implements OnInit {
       // Itera sobre el arreglo de localidades
       localidad.forEach((element: { latitud: number; longitud: number; }) => {
         // Calcula la distancia entre la ubicación actual y cada localidad
-        const distancia = this.haversine(-74,-75.6997211, element.latitud, element.longitud)
+        const distancia = this.haversine(-33.4520697, -70.7409218, element.latitud, element.longitud)
 
         // Compara la distancia con this.distanciaMinima y actualiza si es menor
         if (distancia < this.distanciaMinima) {
@@ -157,100 +171,100 @@ export class CondicionActualPage implements OnInit {
 
   obtenerDatosPronostico() {
     this.isLoading = true; // Activar indicador de carga
-    
+
     this.pronosticoLocalidad.obtenerLocalidadCompleta(this.codigoLocalidad)
       .subscribe((localidad) => {
         this.datosPronosLocalidad = localidad.data[0];
         this.pronosticos = this.datosPronosLocalidad.pronostico;
         this.nombreLocalidad = this.datosPronosLocalidad.nombre;
         this.objetoCondicion = this.datosPronosLocalidad.condicionActual;
-        this.fechaActualizado = this.objetoCondicion.timestamp; 
+        this.fechaActualizado = this.objetoCondicion.timestamp;
         this.vientoFuerza = parseInt(this.objetoCondicion.vientoFuerza);
         this.vientoDireccion = parseInt(this.objetoCondicion.vientoDireccion);
         this.iconoViento = this.obtenerIconoDireccionViento();
         this.condicionTexto = this.objetoCondicion.condicionTexto.toLowerCase().replace(/\s/g, '');
-        
+
         console.log("objeto condicion", this.objetoCondicion);
         console.log("condicion texto", this.condicionTexto);
         console.log("pronostico localidad", this.datosPronosLocalidad);
         console.log("datos", localidad);
-  
+
         this.isLoading = false; // Desactivar indicador de carga cuando se completan los datos
       },
-      (error) => {
-        this.isLoading = false; // Desactivar indicador de carga en caso de error
-        console.error('Error al obtener datos del pronóstico', error);
-      });
+        (error) => {
+          this.isLoading = false; // Desactivar indicador de carga en caso de error
+          console.error('Error al obtener datos del pronóstico', error);
+        });
   }
 
-  
 
-  obtenerIconoDireccionViento(){
-    if(this.vientoDireccion == 0 && this.vientoFuerza == 0){
+
+  obtenerIconoDireccionViento() {
+    if (this.vientoDireccion == 0 && this.vientoFuerza == 0) {
       this.vientoCondicion = 'calma';
       return 'assets/iconosviento/calma.png';
-    }else{
-      if(this.vientoDireccion>348){
+    } else {
+      if (this.vientoDireccion > 348) {
         this.vientoCondicion = 'N';
         return 'assets/iconosviento/n.png';
       }
-      else if(this.vientoDireccion>326){
+      else if (this.vientoDireccion > 326) {
         this.vientoCondicion = 'NNO';
         return 'assets/iconosviento/nno.png';
       }
-      else if(this.vientoDireccion>303){
+      else if (this.vientoDireccion > 303) {
         this.vientoCondicion = 'NO';
         return 'assets/iconosviento/no.png';
       }
-      else if(this.vientoDireccion>282){
+      else if (this.vientoDireccion > 282) {
         this.vientoCondicion = 'ONO';
         return 'assets/iconosviento/ono.png';
       }
-      else if(this.vientoDireccion>258){
+      else if (this.vientoDireccion > 258) {
         this.vientoCondicion = 'O';
         return 'assets/iconosviento/o.png';
       }
-      else if(this.vientoDireccion>236){
-        this.vientoCondicion ='OSO';
+      else if (this.vientoDireccion > 236) {
+        this.vientoCondicion = 'OSO';
         return 'assets/iconosviento/oso.png';
       }
-      else if(this.vientoDireccion>213){
-      this.vientoCondicion = 'SO';
+      else if (this.vientoDireccion > 213) {
+        this.vientoCondicion = 'SO';
         return 'assets/iconosviento/so.png';
       }
-      else if(this.vientoDireccion>191){
+      else if (this.vientoDireccion > 191) {
         this.vientoCondicion = 'SSO';
         return 'assets/iconosviento/sso.png';
       }
-      else if(this.vientoDireccion>168){
+      else if (this.vientoDireccion > 168) {
         this.vientoCondicion = 'S';
         return 'assets/iconosviento/s.png';
       }
-      else if(this.vientoDireccion>146){
+      else if (this.vientoDireccion > 146) {
         this.vientoCondicion = 'SSE';
         return 'assets/iconosviento/sse.png';
       }
-      else if(this.vientoDireccion>123){
+      else if (this.vientoDireccion > 123) {
         this.vientoCondicion = 'SE';
         return 'assets/iconosviento/se.png';
       }
-      else if(this.vientoDireccion>101){
+      else if (this.vientoDireccion > 101) {
         this.vientoCondicion = 'ESE';
         return 'assets/iconosviento/ese.png';
       }
-      else if(this.vientoDireccion>78){
+      else if (this.vientoDireccion > 78) {
         this.vientoCondicion = 'E';
         return 'assets/iconosviento/e.png';
       }
-      else if(this.vientoDireccion>56){
+      else if (this.vientoDireccion > 56) {
         this.vientoCondicion = 'ENE';
         return 'assets/iconosviento/ene.png';
       }
-      else if(this.vientoDireccion>33){
+      else if (this.vientoDireccion > 33) {
         this.vientoCondicion = 'NE';
         return 'assets/iconosviento/ne.png';
       }
-      else if(this.vientoDireccion>11){
+      else if (this.vientoDireccion > 11) {
         this.vientoCondicion = 'NNE';
         return 'assets/iconosviento/nne.png';
       }
@@ -258,18 +272,12 @@ export class CondicionActualPage implements OnInit {
         this.vientoCondicion = 'N';
         return 'assets/iconosviento/n.png';
       }
+    }
   }
-}
 
-obtenerDatosCiudadesFavs(){
-  this.ciudadesAgregadas.forEach((codCiudad: any) => {
-    this.pronosticoLocalidad.obtenerLocalidadCompleta(codCiudad)
-    .subscribe((localidad : any) =>{
-      console.log("localidades favoritas");
-
-    })
-  })
-}
+  obtenerDatosCiudadesFavs() {
+    this.coleccionCiudades.obtenerCiudadesAgregadas();
+  }
 
 
 
@@ -312,6 +320,8 @@ obtenerDatosCiudadesFavs(){
   toggleAccordion() {
     this.expanded = !this.expanded;
   }
+
+
 
 
 }
