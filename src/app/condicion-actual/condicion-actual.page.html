@@ -11,7 +11,7 @@
       alt="logo"
     />
   </a>
-  <a slot="end" href="https://www.meteochile.gob.cl/PortalDMC-web/index.xhtml">
+  <a slot="end" href="https://archivos.meteochile.gob.cl/portaldmc/movil/movil_inicio.php">
     <img
       id="logo"
       src="../../assets/icon/DMC-logo.png"
@@ -109,11 +109,12 @@
               </ion-col>
 
               <ion-col>
-                <img
+                <img 
                   [src]="iconoViento"
                   alt="viento"
                   style="height: 50px; width: 50px"
                 />
+                
               </ion-col>
             </ion-row>
           </ion-grid>
@@ -188,6 +189,7 @@
                         *ngFor="let detalleDia of pronostico.pronosticodetalle"
                       >
                         <img
+                          id = "detalle-dia"
                           *ngIf="detalleDia.icono"
                           [src]="'assets/iconosclima/'+detalleDia.icono"
                           style="height: 50px; width: 50px"

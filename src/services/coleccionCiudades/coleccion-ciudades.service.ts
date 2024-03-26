@@ -28,7 +28,7 @@ export class ColeccionCiudadesService {
       const ciudadesActuales = ciudadesAgregadas.filter(ciudad => ciudad !== codCiudad);
       const nuevasCiudades = [...ciudadesActuales, codCiudad];
       this.codCiudadesAgregadasSubject.next(nuevasCiudades);
-      console.log("Agregada", codCiudad);
+      alert(codCiudad + " ha sido agregada a tus favoritos");
     }
   }
 

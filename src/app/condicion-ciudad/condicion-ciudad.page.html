@@ -5,35 +5,19 @@
   <ion-title style="text-align: center; margin-right: auto"></ion-title>
 
   <a slot="end" href="https://www.dgac.gob.cl/">
-    <img
-      id="logo"
-      src="../../assets/icon/DGAC-logo.jpg"
-      style="height: 40px; width: 30px; margin-right: 1vh"
-      alt="logo"
-    />
+    <img id="logo" src="../../assets/icon/DGAC-logo.jpg" style="height: 40px; width: 30px; margin-right: 1vh"
+      alt="logo" />
   </a>
   <a slot="end" href="https://www.meteochile.gob.cl/PortalDMC-web/index.xhtml">
-    <img
-      id="logo"
-      src="../../assets/icon/DMC-logo.png"
-      style="height: 40px; width: 40px; margin-right: 1vh"
-      alt="logo"
-    />
+    <img id="logo" src="../../assets/icon/DMC-logo.png" style="height: 40px; width: 40px; margin-right: 1vh"
+      alt="logo" />
   </a>
 </ion-toolbar>
 
-<body
-  *ngIf="isLoading"
-  style="background-image: url('../../assets/fondocondicion/appfondo.jpg')"
->
+<body *ngIf="isLoading" style="background-image: url('../../assets/fondocondicion/appfondo.jpg')">
   <div style="text-align: center; position: relative; top: 33%">
     <div class="container">
-      <img
-        src="../../assets/icon/DMC-logo.png"
-        alt="Imagen"
-        class="rotar"
-        style="height: 200px; width: 200px"
-      />
+      <img src="../../assets/icon/DMC-logo.png" alt="Imagen" class="rotar" style="height: 200px; width: 200px" />
     </div>
     <h2 style="font-family: OpenSans-Bold">
       Buscando datos climatológicos para {{nombreLocalidad}}
@@ -41,32 +25,36 @@
   </div>
 </body>
 
-<body
-  *ngIf="!isLoading "
-  [style.backgroundImage]="'url(assets/fondocondicion/' + condicionTexto + '.jpg)'"
-  style="background-size: cover; background-position: center; overflow: auto"
->
+<body *ngIf="!isLoading " [style.backgroundImage]="'url(assets/fondocondicion/' + condicionTexto + '.jpg)'"
+  style="background-size: cover; background-position: center; overflow: auto">
   <div style="position: relative; top: 4rem">
-    <ion-buttons>
-      <ion-button
-        class="botonAgregar"
-        (click)="agregarCiudad(codigoCiudad)"
-        style="margin-right: 8px"
-      >
-        <ion-icon style="color: white" name="add-outline"></ion-icon>
-      </ion-button>
-      <ion-button class="botonEliminar" (click)="eliminarCiudad(codigoCiudad)">
-        <ion-icon name="trash-outline" style="color: white"> </ion-icon>
-      </ion-button>
-    </ion-buttons>
+    <ion-row>
+      <ion-col size="3">
+        <ion-buttons style = "position:relative;text-align:start">
+          <ion-button class="botonAgregar" (click)="agregarCiudad(codigoCiudad)">
+          <ion-icon style="color: white; height :30px; width : 30px " name="add-outline"></ion-icon>
+        </ion-button>
+        </ion-buttons>
+      </ion-col>
+      <ion-col size="6"></ion-col>
+      <ion-col size="3" style = "position:relative;text-align:end">
+        <ion-buttons style = "position: relative;justify-content:end">
+          <ion-button class="botonEliminar" (click)="eliminarCiudad(codigoCiudad)">
+            <ion-icon name="trash-outline" style="color: white; height :30px; width : 30px "> </ion-icon>
+          </ion-button>
+        </ion-buttons> 
+      
+
+      </ion-col>
+    </ion-row>
+
+
   </div>
-  <ion-card
-    style="
+  <ion-card style="
       box-shadow: 0px 2px 0px 1px rgb(143, 135, 135);
       display: contents;
       color: white;
-    "
-  >
+    ">
     <ion-card-header style="color: white; margin-top: 5vh">
       <h1 style="text-align: center"><strong>{{ nombreLocalidad}}</strong></h1>
 
@@ -77,15 +65,13 @@
         <ion-row>
           <ion-col></ion-col>
           <ion-col>
-            <h2
-              style="
+            <h2 style="
                 font-size: 100px;
                 font-weight: bold;
                 display: block;
                 margin: auto;
                 text-align: center;
-              "
-            >
+              ">
               {{ redondearTemperatura() }}°
             </h2>
           </ion-col>
@@ -96,33 +82,23 @@
       <ion-grid class="ion-text-center">
         <ion-row style="display: flex; align-items: center">
           <ion-col>
-            <img
-              [src]="'assets/iconosuv/'+datosPronosLocalidad.indiceUV.indice+'.png'"
-              style="
+            <img [src]="'assets/iconosuv/'+datosPronosLocalidad.indiceUV.indice+'.png'" style="
                 border-radius: 50%;
                 display: block;
                 margin-left: auto;
                 margin-right: auto;
                 width: 50px;
                 height: 50px;
-              "
-            />
+              " />
           </ion-col>
 
           <ion-col>
-            <img
-              [src]="'assets/iconosclima/'+objetoCondicion.condicionIcono"
-              alt="Clima"
-              style="height: 8vh; width: 8vh"
-            />
+            <img [src]="'assets/iconosclima/'+objetoCondicion.condicionIcono" alt="Clima"
+              style="height: 8vh; width: 8vh" />
           </ion-col>
 
           <ion-col>
-            <img
-              [src]="iconoViento"
-              alt="viento"
-              style="height: 50px; width: 50px"
-            />
+            <img [src]="iconoViento" alt="viento" style="height: 50px; width: 50px" />
           </ion-col>
         </ion-row>
       </ion-grid>
@@ -151,11 +127,7 @@
 
       <div class="accordion">
         <div class="accordion-item">
-          <div
-            class="accordion-header"
-            (click)="toggleAccordion()"
-            style="display: flex; justify-content: center"
-          >
+          <div class="accordion-header" (click)="toggleAccordion()" style="display: flex; justify-content: center">
             <ion-icon name="chevron-down-outline" *ngIf="!expanded"></ion-icon>
             <ion-icon name="chevron-up-outline" *ngIf="expanded"></ion-icon>
           </div>
@@ -165,39 +137,24 @@
               <strong> {{pronosticos[0].timestamp}} </strong>
             </p>
 
-            <ion-card
-              *ngFor="let pronostico of pronosticos"
-              style="position: relative"
-            >
+            <ion-card *ngFor="let pronostico of pronosticos" style="position: relative">
               <ion-card-header style="text-align: center; display: contents">
-                <ion-card-subtitle *ngIf="pronostico.temperaturaMinima"
-                  ><strong
-                    >{{pronostico.dia}} • Min: {{pronostico.temperaturaMinima}}°
-                    • Max: {{pronostico.temperaturaMaxima}}°</strong
-                  >
+                <ion-card-subtitle *ngIf="pronostico.temperaturaMinima"><strong>{{pronostico.dia}} • Min:
+                    {{pronostico.temperaturaMinima}}°
+                    • Max: {{pronostico.temperaturaMaxima}}°</strong>
                 </ion-card-subtitle>
-                <ion-card-subtitle *ngIf="!pronostico.temperaturaMinima"
-                  ><strong>
+                <ion-card-subtitle *ngIf="!pronostico.temperaturaMinima"><strong>
                     {{pronostico.dia}} • Max:
-                    {{pronostico.temperaturaMaxima}}°</strong
-                  >
+                    {{pronostico.temperaturaMaxima}}°</strong>
                 </ion-card-subtitle>
               </ion-card-header>
               <ion-card-content style="display: contents">
                 <ion-row style="text-align: center">
-                  <ion-col
-                    *ngFor="let detalleDia of pronostico.pronosticodetalle"
-                  >
-                    <img
-                      *ngIf="detalleDia.icono"
-                      [src]="'assets/iconosclima/'+detalleDia.icono"
-                      style="height: 50px; width: 50px"
-                    />
-                    <img
-                      *ngIf="!detalleDia.icono"
-                      [src]="'assets/iconosclima/vacio.png'"
-                      style="height: 50px; width: 50px"
-                    />
+                  <ion-col *ngFor="let detalleDia of pronostico.pronosticodetalle">
+                    <img *ngIf="detalleDia.icono" [src]="'assets/iconosclima/'+detalleDia.icono"
+                      style="height: 50px; width: 50px" />
+                    <img *ngIf="!detalleDia.icono" [src]="'assets/iconosclima/vacio.png'"
+                      style="height: 50px; width: 50px" />
                   </ion-col>
                 </ion-row>
                 <ion-row style="text-align: center">
