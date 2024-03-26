@@ -197,7 +197,11 @@ export class CondicionActualPage implements OnInit {
         });
   }
 
+  //Funcion para matchear condicion que se obtiene de la api copn el nombre que se encuentra en la carpeta
 
+  condicionTextoMinusculas(condicion : string){
+    return condicion.toLowerCase().replace(/\s/g, '');
+  }
 
   obtenerIconoDireccionViento() {
     if (this.vientoDireccion == 0 && this.vientoFuerza == 0) {
@@ -315,6 +319,10 @@ export class CondicionActualPage implements OnInit {
 
   redondearTemperatura() {
     return Math.floor(this.objetoCondicion.temperatura);
+  }
+
+  redondearTemperaturaConParametro(temperatura: any) {
+    return Math.floor(temperatura);
   }
 
   toggleAccordion() {

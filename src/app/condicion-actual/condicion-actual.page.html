@@ -41,15 +41,15 @@
 </body>
 
 <!--SWIPÉR PARA TODAS LAS CIUDADES-->
-
 <body
-  *ngIf="!isLoading "
-  [style.backgroundImage]="'url(assets/fondocondicion/' + condicionTexto + '.jpg)'"
-  style="background-size: cover; background-position: center; overflow: auto"
->
+  style = " overflow: auto;">
   <swiper-container>
     <swiper-slide>
-      <ion-card
+      <div
+      *ngIf="!isLoading "
+      [style.backgroundImage]="'url(assets/fondocondicion/' + condicionTexto + '.jpg)'"
+      style="background-size: cover; background-position: center; overflow-y: auto; ">
+        <ion-card
         style="
           box-shadow: 0px 2px 0px 1px rgb(143, 135, 135);
           display: contents;
@@ -211,16 +211,20 @@
           </div>
         </ion-card-content>
       </ion-card>
+      </div>
+    
     </swiper-slide>
 
-    <!--SWIPER PARA FAVORITAS-->>
-    <swiper-slide *ngFor="let ciudadFav of ciudadesAgregadas">
+    <!--SWIPER PARA FAVORITAS-->
+      
+      <swiper-slide 
+        *ngFor="let ciudadFav of ciudadesAgregadas"  >
+        <div
+        *ngIf="!isLoading "
+        [style.backgroundImage]="'url(assets/fondocondicion/' + condicionTextoMinusculas(ciudadFav.condicionActual.condicionTexto) + '.jpg)'"
+        style="background-size: cover; background-position: center; overflow: auto;">
       <ion-card
-        style="
-          box-shadow: 0px 2px 0px 1px rgb(143, 135, 135);
-          display: contents;
-          color: white;
-        "
+      style="box-shadow: 0px 2px 0px 1px rgb(143, 135, 135); display: contents; color: white;"
       >
         <ion-card-header style="color: white; margin-top: 5vh">
           <h1 style="text-align: center">
@@ -228,7 +232,7 @@
           </h1>
 
           <h2 style="text-align: center">
-            {{ciudadFav.condicionActual.fechaHora}}
+            {{ciudadFav.condicionActual.timestamp}}
           </h2>
         </ion-card-header>
         <ion-card-content *ngIf="objetoCondicion">
@@ -245,7 +249,7 @@
                     text-align: center;
                   "
                 >
-                  {{ ciudadFav.condicionActual.temperatura }}°
+                  {{ redondearTemperaturaConParametro(ciudadFav.condicionActual.temperatura)   }}°
                 </h2>
               </ion-col>
               <ion-col></ion-col>
@@ -379,6 +383,7 @@
           </div>
         </ion-card-content>
       </ion-card>
+      </div>
     </swiper-slide>
   </swiper-container>
 </body>
