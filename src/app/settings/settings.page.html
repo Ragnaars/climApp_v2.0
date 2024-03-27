@@ -1,0 +1,35 @@
+<ion-toolbar style="display: flex; justify-content: space-between">
+  <ion-buttons slot="start">
+    <ion-menu-button menu="main-menu"></ion-menu-button>
+  </ion-buttons>
+
+  <a slot="end" href="https://www.dgac.gob.cl/">
+    <img
+      id="logo"
+      src="../../assets/icon/DGAC-logo.jpg"
+      style="height: 40px; width: 30px; margin-right: 1vh"
+      alt="logo"
+    />
+  </a>
+  <a slot="end" href="https://archivos.meteochile.gob.cl/portaldmc/movil/movil_inicio.php">
+    <img
+      id="logo"
+      src="../../assets/icon/DMC-logo.png"
+      style="height: 40px; width: 40px; margin-right: 1vh"
+      alt="logo"
+    />
+  </a>
+</ion-toolbar>
+
+<body
+  style="background-size: cover; background-position: center; overflow: auto ; background-color:rgba(53, 160, 192, 0.733) ">
+  <br><br><br><br>
+  <div class="toggle-container">
+    <button class="toggle-button" [class.selected]="isCelsiusSelected" (click)="selectCelsius()">Celsius</button>
+    <div class="divider"></div>
+    <button class="toggle-button" [class.selected]="!isCelsiusSelected" (click)="selectFahrenheit()">Fahrenheit</button>
+  </div>
+  
+  
+  
+</body>

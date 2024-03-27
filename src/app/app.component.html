@@ -106,6 +106,30 @@
           </ion-col>
         </div>
       </ion-menu-toggle>
+      <ion-menu-toggle
+      style="
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+        cursor: pointer;
+      "
+    >
+      <div
+        routerLink="/settings"
+        style="display: inherit; align-items: center width 100%"
+      >
+        <ion-col size="2">
+          <ion-icon
+            style="color: black; width: 25px; height: 25px"
+            name="compass-outline"
+          ></ion-icon>
+        </ion-col>
+        <ion-col size="10">
+          <h3 style="color: black">Configuraciones</h3>
+        </ion-col>
+      </div>
+    </ion-menu-toggle>
       </ion-list>
       <!-- Mover el footer fuera del ion-content -->
     </div>

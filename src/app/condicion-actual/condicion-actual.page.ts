@@ -8,6 +8,8 @@ import { register } from 'swiper/element/bundle';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { forkJoin } from 'rxjs';
 import { ColeccionCiudadesService } from "../../services/coleccionCiudades/coleccion-ciudades.service";
+import {SettingsService} from "../../services/settings/settings.service"
+import {CookieService} from 'ngx-cookie-service';
 register()
 
 
@@ -57,14 +59,17 @@ export class CondicionActualPage implements OnInit {
   expanded = true;
   horasDias = ["00:00", "06:00", "12:00", "18:00"]
   isLoading = true;
+  tipoTemp!: boolean;
 
 
 
   constructor(
+    private cookie : CookieService,
     private condicion: CondicionActService,
     private pronosticoLocalidad: ObtenerLocalidadService,
     private router: Router,
-    private coleccionCiudades: ColeccionCiudadesService) {
+    private coleccionCiudades: ColeccionCiudadesService,
+    private settings: SettingsService) {
     // Llama a infiniteScrollCiudades aquí para que se cargue la lista de ciudades al iniciar la aplicación
     this.obtenerUbicacionActual();
     this.infiniteScrollCiudades();
@@ -75,6 +80,7 @@ export class CondicionActualPage implements OnInit {
 
   ngOnInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id') as string;
+    this.obtenerConfigTemp();
     this.codCiudadesAgregadasSubscription = this.coleccionCiudades.codCiudadesAgregadas$.subscribe(ciudades => {
       const observables = ciudades.map(ciudad => this.pronosticoLocalidad.obtenerLocalidadCompleta(ciudad));
 
@@ -94,6 +100,25 @@ export class CondicionActualPage implements OnInit {
     // Asegúrate de desuscribirte para evitar memory leaks
     this.codCiudadesAgregadasSubscription.unsubscribe();
     this.ciudadesAgregadasSubscription.unsubscribe();
+  }
+
+  obtenerConfigTemp(){
+    if(this.cookie.get("tipoTemperatura") === ""){
+      this.cookie.set("tipoTemperatura","true") //true = Celsius, false = Fahrenheit
+    }else{
+      let tipo = this.cookie.get("tipoTemperatura")
+      let tipoBool = tipo === "true" ? true : false
+      this.settings.setTemperatura(tipoBool)
+    }
+
+    this.settings.tipoTemperatura$.subscribe(tipo => {
+    console.log("tipo de temperatura", tipo)
+    this.tipoTemp = tipo;
+    })
+  }
+
+  celsiusToFahrenheit(celsius: number) {
+    return Math.round(celsius * 9 / 5 + 32);
   }
 
   //FUNCIONES PARA OBTENER UBICACION ACTUAL Y PRONOSTICO DE LOCALIDAD MAS CERCANA

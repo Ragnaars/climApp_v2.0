@@ -69,6 +69,7 @@
               <ion-col></ion-col>
               <ion-col>
                 <h2
+                *ngIf = "tipoTemp"
                   style="
                     font-size: 100px;
                     font-weight: bold;
@@ -79,6 +80,18 @@
                 >
                   {{ redondearTemperatura() }}°
                 </h2>
+                <h2
+                *ngIf = "!tipoTemp"
+                style="
+                  font-size: 100px;
+                  font-weight: bold;
+                  display: block;
+                  margin: auto;
+                  text-align: center;
+                "
+              >
+                {{ celsiusToFahrenheit(redondearTemperatura()) }}°
+              </h2>
               </ion-col>
               <ion-col></ion-col>
             </ion-row>
@@ -169,19 +182,33 @@
                   <ion-card-header
                     style="text-align: center; display: contents"
                   >
-                    <ion-card-subtitle *ngIf="pronostico.temperaturaMinima"
+                    <ion-card-subtitle *ngIf="pronostico.temperaturaMinima && tipoTemp"
                       ><strong
-                        >{{pronostico.dia}} • Min:
+                        >{{pronostico.dia}} • Min: 
                         {{pronostico.temperaturaMinima}}° • Max:
                         {{pronostico.temperaturaMaxima}}°</strong
                       >
                     </ion-card-subtitle>
-                    <ion-card-subtitle *ngIf="!pronostico.temperaturaMinima"
+                    <ion-card-subtitle *ngIf="!pronostico.temperaturaMinima && tipoTemp"
                       ><strong>
                         {{pronostico.dia}} • Max:
                         {{pronostico.temperaturaMaxima}}°</strong
                       >
                     </ion-card-subtitle>
+                    <ion-card-subtitle *ngIf="pronostico.temperaturaMinima && !tipoTemp"
+                    ><strong
+                      >{{pronostico.dia}} • Min: 
+                      {{celsiusToFahrenheit(pronostico.temperaturaMinima)}}° • Max:
+                      {{celsiusToFahrenheit(pronostico.temperaturaMaxima)}}°</strong
+                    >
+
+                  </ion-card-subtitle>
+                  <ion-card-subtitle *ngIf="!pronostico.temperaturaMinima && !tipoTemp"
+                  ><strong>
+                    {{pronostico.dia}} • Max:
+                    {{celsiusToFahrenheit(pronostico.temperaturaMaxima)}}°</strong
+                  >
+                </ion-card-subtitle>
                   </ion-card-header>
                   <ion-card-content style="display: contents">
                     <ion-row style="text-align: center">

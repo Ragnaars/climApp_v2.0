@@ -27,6 +27,10 @@ const routes: Routes = [
     path: 'meteochile',
     loadChildren: () => import('./meteochile/meteochile.module').then( m => m.MeteochilePageModule)
   },
+  {
+    path: 'settings',
+    loadChildren: () => import('./settings/settings.module').then( m => m.SettingsPageModule)
+  },
 ];
 
 @NgModule({

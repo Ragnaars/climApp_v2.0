@@ -1,0 +1,38 @@
+.toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .toggle-button {
+    padding: 10px 20px;
+    font-size: 16px;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    background-color: #007bff;
+    color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  .toggle-button:first-child {
+    border-top-left-radius: 20px; /* Redondear borde superior izquierdo */
+    border-bottom-left-radius: 20px; /* Redondear borde inferior izquierdo */
+  }
+  
+  .toggle-button:last-child {
+    border-top-right-radius: 20px; /* Redondear borde superior derecho */
+    border-bottom-right-radius: 20px; /* Redondear borde inferior derecho */
+  }
+  
+  .toggle-button.selected {
+    background-color: #ccc;
+    color: #000;
+  }
+  
+  .divider {
+    height: 40px; /* Altura de la línea vertical */
+    width: 1px; /* Ancho de la línea vertical */
+    background-color: #ccc;
+  }
+  

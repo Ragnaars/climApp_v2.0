@@ -38,6 +38,7 @@ export class ColeccionCiudadesService {
       alert("La ciudad no se encuentra agregada");
     } else {
       const nuevasCiudades = ciudadesAgregadas.filter(ciudad => ciudad !== codCiudad);
+      
       console.log("nuevo array despues de eliminar", nuevasCiudades)
       this.codCiudadesAgregadasSubject.next(nuevasCiudades);
       console.log("Eliminada : ", codCiudad);
